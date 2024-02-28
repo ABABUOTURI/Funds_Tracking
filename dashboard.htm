@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <title>Responsive Navbar</title>
+</head>
+<style>
+  body {
+       margin: 0;
+       padding: 0;
+       max-width: 100%;
+       font-family: Arial, sans-serif;
+       background-color: #FCF7E4;
+       scroll-behavior: smooth;
+   }
+/*--------------Navigation bar start----------------------*/
+   .welcome-message {
+       text-align: center;
+       margin-bottom: 20px;
+       font-size: 24px;
+       font-weight: bold;
+   }
+
+   .navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: #B7B3DA;
+border-radius: 5px;
+color: #101010;
+font-family: 'Times New Roman', Times, serif;
+padding: 10px 20px;
+}
+
+.navbar .open-icon {
+display: none;
+cursor: pointer;
+}
+
+.navbar .open-icon .bar {
+width: 25px;
+height: 3px;
+background-color: white;
+margin: 4px 0;
+transition: 0.4s;
+}
+
+.navbar ul {
+display: flex;
+list-style: none;
+padding: 0;
+}
+
+.navbar li {
+margin-right: 20px;
+}
+
+.navbar a {
+color: black;
+margin-left: 5%;
+text-decoration: none;
+transition: 0.3s;
+}
+
+.navbar a:hover {
+color: #ddd;
+}
+
+.content {
+padding: 20px;
+}
+
+@media screen and (max-width: 768px) {
+.navbar .open-icon {
+display: block;
+}
+.navbar ul {
+display: none;
+flex-direction: column;
+background-color: #6411e9;
+position: absolute;
+top: 60px;
+left: 8%;
+width: 80%;
+padding: 10px 0;
+z-index: 1000;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.navbar ul.active {
+display: flex;
+}
+
+.navbar li {
+margin: 10px 0;
+}
+}
+.profile-photo img {
+       width: 40px;
+       height: 40px;
+       border-radius: 50%;
+       margin-right: 10px;
+   }
+/*--------------Navigation bar start----------------------*/
+#summaryChart, #appointmentsChart, #statusChart, #diseaseChart, #healthTrendsChart, #calender-table{
+  width: 200px;
+  height: 250px;
+  margin-bottom: 15%;
+}
+/*--------------div1 start----------------------*/
+/*--------------div1 end----------------------*/
+/*--------------div2 start----------------------*/
+#div2 {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 20px;
+padding: 10px;
+justify-content: space-around;
+}
+
+/*.chart-container {
+border: 1px solid #ccc;
+border-radius: 5px;
+padding: 5px;
+height:400px;
+width: 300px;
+flex: 1;
+display: grid;
+justify-content: space-around;
+background-color: #B7B3DA;
+}
+/*--------------div2 end----------------------*/
+/*--------------div3  start----------------------*/
+#div3 {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+gap: 20px;
+padding: 10px;
+justify-content: space-around;
+}
+
+.chart-container {
+border: 1px solid #ccc;
+border-radius: 5px;
+padding: 20px;
+height:300px;
+width: 400px;
+display: grid;
+background-color: #B7B3DA;
+}
+.chart-container1 {
+border: 1px solid #ccc;
+border-radius: 5px;
+padding: 20px;
+height:300px;
+display: grid;
+margin-right: 5%;
+background-color: #B7B3DA;
+}
+
+   .center {
+margin: 0 auto; /* This centers the table horizontally */
+width: 200px; /* This makes the table width fit its content */
+height: 300px;
+}
+
+/* Additional styling for the table cells, you can modify as needed */
+#calendar-table {
+border-collapse: collapse;
+width: 50%;
+height: 40%;
+background-color: #fff;
+}
+#calender{
+border-radius: 10px;
+width: 60%;
+    padding: 10px;
+}
+#calendar-table th, #calendar-table td {
+text-align: center;
+padding: 10px;
+border: 1px solid #101010;
+}
+
+#calendar-table th {
+background-color: #6411e9;
+color: white;
+font-weight: bold;
+}
+
+#calendar-table td:hover {
+background-color: #6411e9;
+color: white;
+}
+
+.today {
+background-color:gold;
+color: blue;
+font-weight: bold;
+border-radius: 50%;
+}
+
+.selected {
+background-color: gold;
+color: white;
+border-radius: 40%;
+}
+
+.day {
+width: 14.28%;
+box-sizing: border-box;
+border: 2px solid #101010;
+padding: 10px;
+text-align: center;
+}
+
+   .booked {
+       background-color: #FFC0CB; /* Light pink, adjust as needed */
+   }
+   h1 {
+       font-size: 18px;
+       margin-bottom: 10px;
+       text-align: center;
+       font-family: 'Times New Roman', Times, serif;
+   }
+   #chart2{
+    width: 90%;
+   }
+
+/*--------------div3 end----------------------*/
+
+
+</style>
+<body>
+  <nav>
+    <div class="navbar" id="navbar">
+      <div class="open-icon" onclick="toggleNavbar()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="dashboard.htm">Dashboard</a></li>
+        <li><a href="payments.htm">Payments</a></li>
+        <li><a href="loan.htm">Loan</a></li>
+      </ul>
+      <div class="welcome-message" id="welcomeMessage">Welcome</div>
+      <div class="profile-photo">
+        <img src="path_to_image" alt="member">
+    </div>
+    </div>
+  </nav>
+  <section id="main-container">
+    <!----------------div1start------------------------------------->
+    <div id="div1"></div>
+    <!----------------div1 end------------------------------------->
+    <!----------------div12start------------------------------------->
+    <div id="div2">
+            <div class="chart-container">
+                <h1>Total Members</h1>
+              <canvas id="summaryChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h1>February Contributions</h1>
+              <canvas id="appointmentsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h1>Loans</h1>
+              <canvas id="statusChart"></canvas>
+            </div>
+    </div>
+    <!----------------div2 end------------------------------------->
+    <!----------------div3start------------------------------------->
+    <div id="div3">
+          <div class="chart-container">
+            <h1>weekly Contributions</h1>
+            <canvas id="diseaseChart"></canvas>
+          </div>
+          <div class="chart-container1" id="chart2">
+            <h1>Fines</h1>
+            <canvas id="healthTrendsChart"></canvas>
+          </div>
+          
+    </div>
+    <!----------------div3end------------------------------------->
+  </section>
+  <script>
+    function toggleNavbar() {
+  var navLinks = document.getElementById("navLinks");
+  navLinks.classList.toggle("active");
+}
+ </script>
+ <!---------------------div2start-------------------------->
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Data for charts
+  const summaryData = {
+    labels: ['Female', 'Male', 'Members'],
+    datasets: [{
+      label: 'total member',
+      data: [5, 7, 12],
+      backgroundColor: ['#6411e9', 'gold', 'navy'],
+    }]
+  };
+
+  const appointmentsData = {
+    labels: ['Week 1', 'Week 2', 'Week3', 'Week 4'],
+    datasets: [{
+      label: 'Monthly Contributions',
+      data: [1200, 900, 800, 1300],
+      backgroundColor: ['purple', '#6411e9', 'navy'],
+    }]
+  };
+
+  const statusData = {
+    labels: ['Loans', 'Paid Loans', 'Pending'],
+    datasets: [{
+      label: 'Loans',
+      data: [2000, 0, 0],
+      backgroundColor: ['gold', 'navy', '#6411e9', 'purple'],
+    }]
+  };
+
+  // Options for charts
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      position: 'right',
+    }
+  };
+
+  // Create Summary Chart
+  const summaryCtx = document.getElementById('summaryChart').getContext('2d');
+  new Chart(summaryCtx, {
+    type: 'doughnut',
+    data: summaryData,
+    options: options
+  });
+
+  // Create Appointments Chart
+  const appointmentsCtx = document.getElementById('appointmentsChart').getContext('2d');
+  new Chart(appointmentsCtx, {
+    type: 'doughnut',
+    data: appointmentsData,
+    options: options
+  });
+
+  // Create Status Chart
+  const statusCtx = document.getElementById('statusChart').getContext('2d');
+  new Chart(statusCtx, {
+    type: 'doughnut',
+    data: statusData,
+    options: options
+  });
+});
+
+ </script>
+ <!---------------------div2end-------------------------->
+ <!---------------------div3start-------------------------->
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Data for charts
+  const diseaseData = {
+    labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+    datasets: [{
+      label: 'Amount',
+      data: [2000, 1500, 1800, 1200],
+      backgroundColor: ['yellow','blue','green','purple']
+       }]
+  };
+
+  const healthTrendsData = {
+    labels: ['Kimathi', 'Muna', 'Marvo', 'Sandra','Legend','Mercy','Momanyi','Rhodah','Limo','Steph','Dave','Matei'],
+    datasets: [{
+      label: 'Amount',
+      data: [0, 50, 50, 50,50,0,50,0,50,50,0,0],
+      backgroundColor: ['purple', '#6411e9', '#6411e9', 'red','#6411e9', 'purple', 'red', 'gold','red', '#6411e9', 'purple', 'purple'],
+    }]
+  };
+
+  // Options for charts
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+        }
+      }]
+    }
+  };
+
+  // Create Disease Chart (Histogram)
+  const diseaseCtx = document.getElementById('diseaseChart').getContext('2d');
+  new Chart(diseaseCtx, {
+    type: 'bar',
+    data: diseaseData,
+    options: {
+      ...options,
+      scales: {
+        xAxes: [{
+          barPercentage: 0.5,
+          categoryPercentage: 0.5,
+        }],
+        yAxes: [{
+          ticks: {
+            stepSize: 10,
+            beginAtZero: true,
+          }
+        }]
+      }
+    }
+  });
+
+  // Create Health Trends Chart (Bar Chart)
+  const healthTrendsCtx = document.getElementById('healthTrendsChart').getContext('2d');
+  new Chart(healthTrendsCtx, {
+    type: 'bar',
+    data: healthTrendsData,
+    options: options
+  });
+});
+
+ </script>
+ <!---------------------div3end-------------------------->
+</body>
+</html>

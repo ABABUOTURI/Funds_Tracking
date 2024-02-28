@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Recovery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: blue;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2 style="font-family: 'Times New Roman', Times, serif;font-weight: bold;">Password Recovery</h2>
+        <form id="recovery-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <button type="button" style="font-weight: bold;font-family: 'Times New Roman', Times, serif;" onclick="sendResetLink()">Reset Password</button>
+        </form>
+    </div>
+
+    <script>
+        function sendResetLink() {
+            var email = document.getElementById('email').value;
+
+            // Simulating the process of sending a reset link
+            // In a real-world scenario, this would be handled on the server side
+            if (email) {
+                alert('TOKEN has been sent to your email. Please check your Email.');
+                // You may want to redirect the user to the reset password page
+                // window.location.href = 'reset_password_page.html';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+    </script>
+</body>
+</html>

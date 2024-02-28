@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+form {
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+select,
+textarea {
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Media Queries */
+@media only screen and (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .container {
+        max-width: 992px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+
+
+</style>
+<body>
+    <div class="container">
+        <h1>Loan Application</h1>
+        <form id="loanForm" onsubmit="return validateForm()">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required><br><br>
+            
+            <label for="phone">Phone No:</label>
+            <input type="tel" id="phone" name="phone" required><br><br>
+            
+            <label for="loanAmount">Amount of Loan Applying for:</label>
+<input type="number" id="loanAmount" name="loanAmount" required min="0"><br><br>
+
+            
+            <label for="loanDuration">Duration of Loan:</label>
+            <select id="loanDuration" name="loanDuration" required>
+                <option value="">Select Duration</option>
+                <option value="7">7 Days</option>
+                <option value="14">14 Days</option>
+                <option value="21">21 Days</option>
+                <option value="other">Other (Specify in Message)</option>
+            </select><br><br>
+            
+            <label for="message">Short Message:</label><br>
+            <textarea id="message" name="message" rows="4" cols="50" readonly>Dear member make sure you adhere to the terms of the platform.If you click on  agree no action will be reversed.
+                Interest: 10% per week.</textarea><br><br>
+            
+            <input type="checkbox" id="agree" name="agree" required>
+            <label for="agree">I agree to the terms and conditions.</label><br><br>
+            
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function validateForm() {
+    var fullName = document.getElementById("fullName").value;
+    var phone = document.getElementById("phone").value;
+    var loanAmount = parseFloat(document.getElementById("loanAmount").value);
+    var loanDuration = parseInt(document.getElementById("loanDuration").value);
+    var message = document.getElementById("message");
+    var agree = document.getElementById("agree").checked;
+
+    if (fullName === '' || phone === '' || isNaN(loanAmount) || loanDuration === 0 || !agree) {
+        alert("Please fill in all fields and agree to the terms.");
+        return false;
+    }
+
+    var interestRate = 0.10; // 10%
+    var interest = loanAmount * interestRate * (loanDuration / 7);
+    var totalAmount = loanAmount + interest;
+
+    message.innerText = "Your expected amount would be " + totalAmount.toFixed(2) + " after " + loanDuration + " days.";
+
+    // Assuming all fields are valid, show success message and navigate after 2 seconds
+    alert("Your loan will be confirmed in less than an hour.");
+    setTimeout(function() {
+        window.location.href = "dashboard.html";
+    }, 5000);
+
+    return false; // Prevent form submission
+}
+
+    </script>
+</body>
+</html>

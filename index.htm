@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Web App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #financial-advice {
+            background-color: #3498db;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #login-container h2{
+            text-align: center;
+            font-size: 25px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            margin-left: 15%;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        input {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            margin-left: 15%;
+        }
+
+        #btn1 {
+            background-color: blue;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-left: 45%;
+            font-size: 18px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #p1{
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #financial-advice, #login-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="financial-advice">
+            <h2>Manage Your Funds</h2>
+            <p>Save money for the future.</p>
+            <!-- Add more financial advice messages here -->
+        </div>
+
+        <div id="login-container">
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button id="btn1" type="submit" onclick="validateLogin()">Login</button>
+            </form>
+
+            <p id="p1">Don't have an account? <a href="signup.htm">Sign Up</a></p><br>
+            <p id="p1">Forgot Password? <a href="resetps.htm">Reset</a></p>
+        </div>
+    </div>
+
+    <!-- Add your JavaScript code for login functionality, signup, etc. -->
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            validateLogin(); // Call the login validation function
+        });
+
+        function validateLogin() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // For simplicity, let's assume a hardcoded username and password
+            var correctUsername = 'ABABU';
+            var correctPassword = 'legend';
+
+            if (username === correctUsername && password === correctPassword) {
+                // Successful login
+                alert('Login successful! Welcome, ' + username);
+                window.location.href = "dashboard.htm"; // Redirect to dashboard
+            } else {
+                // Unsuccessful login
+                alert('Login failed. Please check your username and password.');
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+form {
+    padding: 20px;
+    width: 80%;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-left: 10%;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+input[type="text"],
+input[type="tel"],
+select {
+    width: 70%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+input[type="submit"] {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+        max-width: none;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    input[type="submit"] {
+        padding: 8px 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    input[type="submit"] {
+        width: 100%;
+    }
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Make a Payment</h1>
+        <form id="paymentForm" onsubmit="processPayment()">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            
+            <label for="phone">Phone No:</label>
+            <input type="tel" id="phone" name="phone" required><br><br>
+            
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            
+            <label for="paymentType">Payment Type:</label>
+            <select id="paymentType" name="paymentType" required>
+                <option value="">Select Payment Type</option>
+                <option value="mpesa">M-Pesa</option>
+                <option value="bank">Bank</option>
+            </select><br><br>
+            
+            <input type="submit" value="Make Payment">
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function processPayment() {
+    var name = document.getElementById("name").value;
+    var phone = document.getElementById("phone").value;
+    var username = document.getElementById("username").value;
+    var paymentType = document.getElementById("paymentType").value;
+
+    if (name === '' || phone === '' || username === '' || paymentType === '') {
+        alert("Please fill in all fields.");
+        return false;
+    }
+
+    if (paymentType === 'mpesa') {
+        window.location.href = "https://mpesa.com/payment";
+    } else if (paymentType === 'bank') {
+        // Redirect to bank payment page or perform bank payment operation
+        alert("Redirecting to Bank Payment Page...");
+    }
+
+    return false; // Prevent form submission
+}
+
+    </script>
+</body>
+</html>
